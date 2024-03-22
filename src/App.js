@@ -1,8 +1,10 @@
+import { RouterProvider } from "react-router-dom";
+import root from "./router/root";
 
 
 function App() {
   return (
-   <div className='text-10x font-extrabold m-2 p-3 bg-green-500'>하이~</div>
+    <RouterProvider router={root} />
   );
 }
 
