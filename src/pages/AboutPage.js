@@ -1,14 +1,13 @@
 import { Link } from "react-router-dom";
+import BasicLayout from "../layouts/BasicLayout";
+import BasicMenu from "../components/menus/BasicMenu";
 
 const AboutPage = () => {
     return (
-        <div>
-            <div className="{'flex'}">
-                <Link to={'/about'}> About </Link> 
-            </div>
-
-            <div>AboutPage</div>
-        </div>
+        
+        <BasicLayout>
+            <div className="text-3xl">AboutPage</div>
+        </BasicLayout>
     );
 }
 
