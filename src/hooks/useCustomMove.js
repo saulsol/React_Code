@@ -27,13 +27,24 @@ const useCustomMove = () => {
 
             queryStr = createSearchParams({page: pageNum, size: sizeNum}).toString();
         }else{
-            queryStr = queryDefault;
+            queryStr = queryDefault; 
         }
 
         navigate({pathname: `../list`, search: queryStr })
     }
 
-    return {moveToList, page, size}
+    const moveToModify = (num) => {
+        console.log(queryDefault); 
+
+        navigate({
+            pathname: `../modify/${num}`,
+            search: queryDefault
+        })
+    }
+
+
+
+    return {moveToList, moveToModify, page, size}
 }
 
 export default useCustomMove
