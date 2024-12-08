@@ -1,12 +1,15 @@
-import {createSlice} from "@reduxjs/toolkit"
+import {createSlice, createAsyncThunk} from "@reduxjs/toolkit"
+import { loginPost } from "../api/memberApi"
+
  
 
 const initState = {
     email: ''
 }
 
-// state => 기존의 상태
-// action => 
+export const loginPostAsync = createAsyncThunk('loginPostAsync', (param) => {
+    return loginPost(param)
+})
 
 const loginSlice = createSlice({
     name: 'loginSlice',
@@ -18,8 +21,21 @@ const loginSlice = createSlice({
             return {email: action.payload.email}
         },
         logout: (state, action) => {
-            console.log("logout....")
+            console.log("logout....", state)
+            return {...initState}
         }
+    },
+
+    extraReducers: (builder) => {
+        builder.addCase(loginPostAsync.fulfilled, (state, action)=> {
+            console.log('fulfilled')
+        })
+        .addCase(loginPostAsync.pending, (state, action) => {
+            console.log('pending')
+        })
+        .addCase(loginPostAsync.rejected, (state, action) => {
+            console.log('rejected')
+        })
     }
 
 })
