@@ -4,6 +4,9 @@ import { useSelector } from 'react-redux';
 const BasicMenu = () => {
 
     const loginState = useSelector(state => state.loginSlice)
+    // loginSlicce를 구독한 상황 
+
+    console.log(loginState)
 
 
 
