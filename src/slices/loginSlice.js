@@ -1,6 +1,6 @@
 import {createSlice, createAsyncThunk} from "@reduxjs/toolkit"
 import { loginPost } from "../api/memberApi"
-import { setCookie } from './../util/cookieUtil';
+import { getCookie, removeCookie, setCookie } from './../util/cookieUtil';
 
  
 
@@ -8,13 +8,19 @@ const initState = {
     email: ''
 }
 
+const loadMemberCookie = () => {
+    const memberInfo = getCookie('member'); 
+    return memberInfo; 
+}
+
+
 export const loginPostAsync = createAsyncThunk('loginPostAsync', (param) => {
     return loginPost(param)
 })
 
 const loginSlice = createSlice({
     name: 'loginSlice',
-    initialState: initState,
+    initialState: loadMemberCookie() || initState,
     reducers: {
         login: (state, action) => {
             console.log("login....", action.payload)
@@ -23,6 +29,7 @@ const loginSlice = createSlice({
         },
         logout: (state, action) => {
             console.log("logout....", state)
+            removeCookie('member'); 
             return {...initState}
         }
     },
