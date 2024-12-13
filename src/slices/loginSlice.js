@@ -1,5 +1,6 @@
 import {createSlice, createAsyncThunk} from "@reduxjs/toolkit"
 import { loginPost } from "../api/memberApi"
+import { setCookie } from './../util/cookieUtil';
 
  
 
@@ -30,7 +31,13 @@ const loginSlice = createSlice({
         builder.addCase(loginPostAsync.fulfilled, (state, action)=> {
             console.log('fulfilled')
             const payload = action.payload
-            console.log(payload)
+            
+            if(!payload.error){
+                setCookie("member", 
+                    JSON.stringify(payload),
+                    { expires: new Date(Date.now() + 3600), path: '/' } )
+            }
+
             return payload;
 
         })
