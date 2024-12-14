@@ -2,12 +2,11 @@ import {Cookies} from 'react-cookie'
 
 const cookies = new Cookies();
 
-export const setCookie = (name, value, options = {}) => {
-    if(options.expires && !(options.expires instanceof Date)){
-        alert("쿠키 값 이상")
-    }
+export const setCookie = (name, value, days) => {
+    const expires = new Date()
+    expires.setUTCDate(expires.getUTCDate() + days) // 보관기간
    
-    return cookies.set(name, value, options);
+    return cookies.set(name, value, {path: '/', expires:expires});
 }
 
 export const getCookie = (name) => {

@@ -42,7 +42,7 @@ const loginSlice = createSlice({
             if(!payload.error){
                 setCookie("member", 
                     JSON.stringify(payload),
-                    { expires: new Date(Date.now() + 3600), path: '/' } )
+                    1 )
             }
 
             return payload;
